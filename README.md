@@ -3,6 +3,7 @@
 > Complete file organizer, deduplicator & secure shredder.
 > **One engine — CLI, YAML config, GUI all call the exact same `run_job()` function.**
 
+[![Version](https://img.shields.io/badge/version-4.0.0-blue)]()
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue)]()
 [![CustomTkinter](https://img.shields.io/badge/GUI-CustomTkinter-purple)]()
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)]()

@@ -1276,6 +1276,7 @@ Examples:
     )
     p.add_argument("--unregister-context-menu", action="store_true")
     p.add_argument("--gui", action="store_true", help="Launch GUI")
+    p.add_argument("--version", action="version", version="FileVault v4.0.0")
     args = p.parse_args()
 
     setup_logging(args.log_file)
