@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install blake3 pymupdf pypdf pikepdf python-docx openpyxl python-pptx
+          pip install Pillow imagehash piexif watchdog PyYAML
+
+      - name: Smoke test — dry-run on temp folders
+        run: |
+          mkdir -p /tmp/fv_src /tmp/fv_tgt
+          echo "hello world" > /tmp/fv_src/test.txt
+          cp /tmp/fv_src/test.txt /tmp/fv_src/test_copy.txt
+          python filevault.py /tmp/fv_src /tmp/fv_tgt --dry-run --no-json --no-csv --no-html
+        shell: bash
+
+      - name: Lint with ruff
+        run: |
+          pip install ruff
+          ruff check filevault.py filevault_gui.py --ignore E501

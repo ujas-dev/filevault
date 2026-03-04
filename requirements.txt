@@ -1,0 +1,12 @@
+customtkinter
+blake3
+pymupdf
+pypdf
+pikepdf
+python-docx
+openpyxl
+python-pptx
+Pillow
+imagehash
+watchdog
+pyyaml

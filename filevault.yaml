@@ -1,0 +1,77 @@
+# filevault.yaml — Full example config
+# Run: python filevault.py --config filevault.yaml
+# Every key here matches the GUI field exactly.
+
+source: /path/to/source
+target: /path/to/target
+
+dry_run: false
+passes: 7
+workers: 8
+
+# "all" | "unique" | "dupes"
+move_mode: all
+
+# Sub-folder structure
+use_subfolders: true
+# "unique_dupes" | "by_type" | "flat"
+subfolder_mode: unique_dupes
+
+# Rename options
+rename_folder: true
+metadata_rename: true
+rename_date_prefix: false   # prefix images with EXIF date
+
+# Shred options
+shred_dupes: true
+shred_all: false
+quick_scan: false
+
+# Exclude patterns (glob)
+exclude:
+  - "*.tmp"
+  - "*.DS_Store"
+  - "Thumbs.db"
+  - "desktop.ini"
+  - "*.log"
+
+# Plugin directory (optional)
+plugin_dir: ""
+
+# EXIF metadata editor (images only)
+# Remove / update metadata fields before copy
+exif_edits:
+  remove_gps: false           # strip GPS latitude/longitude
+  remove_device: false        # strip Make / Model / Software
+  # set_datetime: null        # null = remove, or "2024:01:01 00:00:00" to set
+  # set_author: "Your Name"   # set Artist + Copyright, null = remove
+  # set_description: null     # set ImageDescription, null = remove
+
+# Reports
+report_json: true
+report_csv: true
+report_html: true
+report_json_path: filevault_report.json
+report_csv_path: filevault_moves.csv
+report_html_path: filevault_report.html
+
+# Log file
+log_file: filevault.log
+
+# ── Scheduler (optional) ───────────────────────────────────────────────────
+# Remove / comment out to run immediately.
+#
+# One-time at specific datetime:
+# schedule:
+#   type: once
+#   at: "2026-03-10 02:00"
+#
+# Daily at a fixed time:
+# schedule:
+#   type: daily
+#   at: "02:00"
+#
+# Every N minutes:
+# schedule:
+#   type: interval
+#   every_minutes: 60
